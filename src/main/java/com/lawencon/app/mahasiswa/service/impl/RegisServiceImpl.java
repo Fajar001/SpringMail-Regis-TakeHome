@@ -15,12 +15,12 @@ import com.lawencon.app.mahasiswa.service.RegisService;
 
 @Service
 @Transactional
-public class RegisServiceImpl implements RegisService{
-	
+public class RegisServiceImpl implements RegisService {
+
 	@Autowired
 	@Qualifier("regis_repo_hibernate")
 	private RegisDao regisDao;
-	
+
 	@Autowired
 	private JavaMailSender javaMail;
 
@@ -57,5 +57,23 @@ public class RegisServiceImpl implements RegisService{
 		msg.setText("Thank you for your registration");
 		javaMail.send(msg);
 		return "Ok";
+	}
+
+	@Override
+	public String sendMailOption(Registrasi regis) throws Exception {
+		SimpleMailMessage msg = new SimpleMailMessage();
+		if(regis.getStatus().equals("approve")) {
+			msg.setTo(regis.getEmail());
+			msg.setSubject("Registration Approved");
+			msg.setText("Congratulation, you are approved");
+			javaMail.send(msg);
+		}
+		else if(regis.getStatus().equals("reject")) {
+			msg.setTo(regis.getEmail());
+			msg.setSubject("Registration Denied");
+			msg.setText("Sorry, you can try again later");
+			javaMail.send(msg);
+		}
+		return "OK";
 	}
 }

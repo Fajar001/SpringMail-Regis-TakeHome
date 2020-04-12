@@ -61,10 +61,12 @@ public class RegisController extends BaseController<Registrasi> {
 	}
 	
 	@PostMapping("/update/{id}/{status}")
-	public ResponseEntity<?> getupdate(@PathVariable("id")int id, @PathVariable("status")String status){
+	public ResponseEntity<?> getupdateApprove(@PathVariable("id")int id, @PathVariable("status")String status){
 		try {
-			regisService.update(id, status);
+			Registrasi regis = regisService.update(id, status);
+			regisService.sendMailOption(regis);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return new ResponseEntity<>("Failed to Update", HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<>("Success", HttpStatus.OK);

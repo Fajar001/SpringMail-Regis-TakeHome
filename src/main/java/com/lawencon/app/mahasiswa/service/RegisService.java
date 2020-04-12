@@ -11,4 +11,5 @@ public interface RegisService {
 	abstract Registrasi update(int id, String status)throws Exception;
 	abstract String delete(int id)throws Exception;
 	abstract String sendMail(Registrasi regis)throws Exception;
+	abstract String sendMailOption(Registrasi regis)throws Exception;
 }

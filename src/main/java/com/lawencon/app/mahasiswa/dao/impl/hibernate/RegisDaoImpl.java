@@ -14,7 +14,7 @@ public class RegisDaoImpl extends BaseHibernate implements RegisDao{
 
 	@Override
 	public List<?> findAll() throws Exception {
-		Query q = em.createQuery("from Registrasi");
+		Query q = em.createQuery("from Registrasi where status like 'pending'");
 		return q.getResultList();
 	}
 
@@ -30,7 +30,9 @@ public class RegisDaoImpl extends BaseHibernate implements RegisDao{
 		q.setParameter("idParam", id);
 		Registrasi regis = new Registrasi();
 		regis = (Registrasi) q.getSingleResult();
+		regis.setIdRegis(id);
 		regis.setStatus(status);
+		System.out.println(regis.getEmail());
 		em.merge(regis);
 		return regis;
 	}
