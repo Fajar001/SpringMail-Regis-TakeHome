@@ -32,7 +32,6 @@ public class RegisDaoImpl extends BaseHibernate implements RegisDao{
 		regis = (Registrasi) q.getSingleResult();
 		regis.setIdRegis(id);
 		regis.setStatus(status);
-		System.out.println(regis.getEmail());
 		em.merge(regis);
 		return regis;
 	}
