@@ -14,7 +14,7 @@ public class RegisDaoImpl extends BaseHibernate implements RegisDao{
 
 	@Override
 	public List<?> findAll() throws Exception {
-		Query q = em.createQuery("from Registrasi where status like 'pending'");
+		Query q = em.createQuery("from Registrasi where status is null");
 		return q.getResultList();
 	}
 
