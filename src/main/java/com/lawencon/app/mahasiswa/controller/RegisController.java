@@ -17,6 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.lawencon.app.mahasiswa.model.Registrasi;
 import com.lawencon.app.mahasiswa.service.RegisService;
 
+/**
+ * 
+ * @author Fajar & Aldhy
+ * BE : Fajar
+ * FE : Aldhy
+ *
+ */
+
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/regis")
@@ -45,6 +53,17 @@ public class RegisController extends BaseController<Registrasi> {
 			return new ResponseEntity<>(listApprove, HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<>(listApprove, HttpStatus.OK);
+	}
+	
+	@GetMapping("/show/{id}")
+	public ResponseEntity<?> getListId(@PathVariable("id") int id){
+		List<?> listId = new ArrayList<>();
+		try {
+			listId = regisService.findById(id);
+		} catch (Exception e) {
+			return new ResponseEntity<>(listId, HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<>(listId, HttpStatus.OK);
 	}
 	
 	@PostMapping("/insert")

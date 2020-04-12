@@ -53,4 +53,11 @@ public class RegisDaoImpl extends BaseHibernate implements RegisDao{
 		q.setParameter("statusParam", status);
 		return q.getResultList();
 	}
+
+	@Override
+	public List<?> findById(int id) throws Exception {
+		Query q = em.createQuery("from Registrasi where idRegis = :idParam").
+				setParameter("idParam", id);
+		return q.getResultList();
+	}
 }

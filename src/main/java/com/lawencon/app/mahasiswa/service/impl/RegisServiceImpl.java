@@ -76,4 +76,9 @@ public class RegisServiceImpl implements RegisService {
 		}
 		return "OK";
 	}
+
+	@Override
+	public List<?> findById(int id) throws Exception {
+		return regisDao.findById(id);
+	}
 }
